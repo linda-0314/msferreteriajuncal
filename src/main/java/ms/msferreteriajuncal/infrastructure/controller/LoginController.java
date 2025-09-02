@@ -14,6 +14,7 @@ public class LoginController {
     @Autowired
     private ILoginService loginService;
 
+    // Esto lo realizo mi primo camilo, yo no hice nada
     @PostMapping(value = "/prueba")
     public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
         try {
