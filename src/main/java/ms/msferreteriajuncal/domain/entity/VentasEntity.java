@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -15,7 +18,10 @@ public class VentasEntity {
     private long idVentas;
 
     @Column  (length = 50,name = "Fecha")
-    private String fecha;
+    private LocalDateTime fecha;
+
+    @Column (name = "total")
+    private BigDecimal total;
 
     @ManyToOne
     @JoinColumn(name = "id_Usuario")

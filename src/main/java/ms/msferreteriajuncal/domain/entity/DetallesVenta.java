@@ -4,11 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
-@Table( name ="DetallesVenta")
+@Table(name = "DetallesVenta")
 public class DetallesVenta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idDetallesVentas;
@@ -21,12 +24,9 @@ public class DetallesVenta {
     @JoinColumn(name = "id_Producto")
     private ProductoEntity idProducto;
 
-    @Column  (length = 50,name = "cantidad")
+    @Column(name = "cantidad")
     private int cantidad;
 
-    @Column  (length = 50,name = "precio")
-    private int precio;
-
+    @Column(name = "precio")
+    private BigDecimal precio;
 }
-
-
