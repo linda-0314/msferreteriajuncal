@@ -25,6 +25,6 @@ public class VentasEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_Usuario")
-    private UserEntity user;
+    private UserEntity user;// hizo la venta
 
 }

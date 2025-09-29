@@ -1,11 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026882b-7c6a-422d-aa26-aa47a6f2216b" name="Changes" comment="" />
+    <list default="true" id="2026882b-7c6a-422d-aa26-aa47a6f2216b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/VentaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/VentaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/VentaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/ReporteVentasService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/ReporteVentasResumenDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaDiariaDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaPorProductoDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaPorUsuarioDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/port/interactor/IReporteVentasService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/domain/entity/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/domain/entity/UserEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/ReporteVentasController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IDetalleVentaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IDetalleVentaRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IProductoRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IProductoRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IVentaRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IDetalleVentaRepository.class.uniqueId7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IReporteVentasService.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IVentaRepository.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteVentasController.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteVentasResumenDTO.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteVentasService.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VentaDiariaDTO.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VentaPorProductoDTO.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/ReporteVentasService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/ReporteVentasResumenDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaDiariaDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaPorProductoDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaPorUsuarioDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/port/interactor/IReporteVentasService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/ProductoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/ProductoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/VentasEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/VentasEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/ReporteVentasController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IDetalleVentaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IDetalleVentaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IProductoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IProductoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IVentaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="msferreteriajuncal" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="msferreteriajuncal" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="msferreteriajuncal" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="msferreteriajuncal" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="runtimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="msferreteriajuncal" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testRuntimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -15,22 +125,56 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="329G15oKVwMhb18yBdLFpXNPR6D" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/linda__01092025",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build msferreteriajuncal.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.MsferreteriajuncalApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/linda__01092025&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="MsferreteriajuncalApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="msferreteriajuncal.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ms.msferreteriajuncal.MsferreteriajuncalApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -39,7 +183,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756825159621</updated>
+      <workItem from="1758831439165" duration="2971000" />
+      <workItem from="1758835643945" duration="3017000" />
+      <workItem from="1758840113677" duration="50000" />
+      <workItem from="1758840208956" duration="623000" />
+      <workItem from="1758841120085" duration="3127000" />
+      <workItem from="1758844522214" duration="1406000" />
+      <workItem from="1758845963278" duration="1226000" />
+      <workItem from="1758847213325" duration="1581000" />
+      <workItem from="1759096234981" duration="12804000" />
+      <workItem from="1759110068812" duration="5436000" />
+      <workItem from="1759115687935" duration="39000" />
+      <workItem from="1759177532104" duration="5985000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

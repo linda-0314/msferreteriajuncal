@@ -3,35 +3,36 @@ package ms.msferreteriajuncal.domain.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "Productos")
+@Table(name = "productos") // <-- minúsculas
 public class ProductoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_Producto")
-    private long idProducto;
+    @Column(name = "id_producto")       // <-- minúsculas
+    private Long idProducto;            // usa Long (wrapper)
 
-    @Column(name = "Nom_Producto")
+    @Column(name = "nom_producto")
     private String nombreProducto;
 
-    @Column(name = "Pro_Categoria", length = 60)
+    @Column(name = "pro_categoria", length = 60)
     private String proCategoria;
 
-    @Column(name = "Pro_unidad")
-    private int proUnidad;
+    @Column(name = "pro_unidad")
+    private Integer proUnidad;
 
-    @Column(name = "Pro_cantidad")
-    private int proCantidad;
+    @Column(name = "pro_cantidad")
+    private Integer proCantidad;
 
-    @Column(name = "Pro_PrecioEntrada")
-    private long proPrecioEntrada;
+    @Column(name = "pro_precio_entrada")
+    private Long proPrecioEntrada;
 
-    @Column(name = "Pro_PrecioSalida")
-    private long proPrecioSalida;
+    @Column(name = "pro_precio_salida")
+    private Long proPrecioSalida;
 
-    @Column(name = "Pro_Descuento")
-    private long proDescuento;
+    @Column(name = "pro_descuento")
+    private Long proDescuento;
 }
