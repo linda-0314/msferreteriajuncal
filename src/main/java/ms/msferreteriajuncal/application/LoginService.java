@@ -13,7 +13,7 @@ import java.util.Optional;
 public class LoginService implements ILoginService {
 
     @Autowired
-    private IUsuarioRepository iUsuarioRepository;// se inyecta el repositorio a la entidad
+    private IUsuarioRepository iUsuarioRepository;
 
     @Override
     public void login(LoginRequestDto loginRequestDto) {
