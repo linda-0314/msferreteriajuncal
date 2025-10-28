@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-252.25557.131">
+  <component name="dataSourceStorageLocal" created-in="IU-243.25659.59">
     <data-source name="local_ferreteriajuncal@localhost" uuid="8b055dcb-286d-48a4-a49c-dd79ca112536">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
       <user-name>root</user-name>

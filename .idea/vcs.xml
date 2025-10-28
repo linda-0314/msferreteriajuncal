@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/msferreteriajuncal" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/msferreteriajuncal/msferreteriajuncal" vcs="Git" />
   </component>
 </project>
