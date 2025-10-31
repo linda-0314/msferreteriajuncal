@@ -56,5 +56,37 @@ public class ProductoController {
         return ResponseEntity.ok( ).build();
     }
 
+    // BUSCAR POR NOMBRE (autocomplete)
+    @GetMapping("/buscar")
+    public ResponseEntity<List<ProductoLite>> buscarPorNombre(@RequestParam("nombre") String nombre) {
+        var lista = productoService.buscarPorNombre(nombre);
+        // Devolvemos solo lo que necesita el front para autocompletar
+        var out = lista.stream()
+                .map(p -> new ProductoLite(
+                        p.getIdProducto(),
+                        // Usa el getter correcto según tu Entity:
+                        // p.getProNombre(),
+                        // p.getNombreProducto(),
+                        // Si tu campo es proNombre:
+                        // p.getProNombre(),
+                        // Si tu campo es nombreProducto:
+                        p.getNombreProducto(),
+                        p.getProPrecioSalida()
+                ))
+                .toList();
+        return new ResponseEntity<>(out, HttpStatus.OK);
+    }
+
+    // DTO liviano para autocomplete
+    public record ProductoLite(Long id, String nombre, Long precioSalida) {}
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductoEntity> obtenerPorId(@PathVariable Long id) {
+        ProductoEntity producto = productoService.getProductoById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return new ResponseEntity<>(producto, HttpStatus.OK);
+    }
+
 
 }

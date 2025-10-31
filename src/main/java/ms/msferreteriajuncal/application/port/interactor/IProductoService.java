@@ -15,6 +15,8 @@ public interface IProductoService  {
 
     Optional<ProductoEntity> getProductoById(Long id); // BUSCA POR SU ID
 
+    List<ProductoEntity> buscarPorNombre(String nombre);
+
     void eliminarProductoPorId(Long idProveedor); // ELIMINA
 
 

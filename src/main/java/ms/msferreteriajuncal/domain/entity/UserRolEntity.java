@@ -14,9 +14,16 @@ public class UserRolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long id_Rol;
+    // ⚙️ Campo antiguo (se mantiene para compatibilidad con tu servicio)
+    private Long id_Rol;
 
+    // 🔗 Nueva relación con la tabla Roles (opcional para usar objetos)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_Rol", insertable = false, updatable = false)
+    private RolesEntity rolesEntity;
+
+    // 🔗 Relación con Usuario
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_Usuario")
-    private UserEntity userEntity ;
+    private UserEntity userEntity;
 }

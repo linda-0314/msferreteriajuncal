@@ -56,4 +56,14 @@ public class ProductoService implements IProductoService {
     public void eliminarProductoPorId(Long idProducto) {
         productoRepository.deleteById(idProducto);
     }
+
+    @Override
+    public List<ProductoEntity> buscarPorNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return List.of();
+        }
+        // Usa el que corresponda según tu Entity:
+        return productoRepository.findTop20ByNombreProductoContainingIgnoreCaseOrderByNombreProductoAsc(nombre.trim());
+    }
+
 }
