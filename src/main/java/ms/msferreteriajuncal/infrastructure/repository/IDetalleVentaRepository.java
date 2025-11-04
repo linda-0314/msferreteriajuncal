@@ -2,12 +2,16 @@ package ms.msferreteriajuncal.infrastructure.repository;
 
 import ms.msferreteriajuncal.domain.entity.DetallesVenta;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-public interface IDetalleVentaRepository  extends JpaRepository<DetallesVenta, Long> { // Para GET /ventas/{id} con detalles (opcional pero recomendado)
-    @Query("select d from DetallesVenta d where d.idVenta.idVentas = :ventaId")
-    List<DetallesVenta> findAllByVentaId(@Param("ventaId") Long ventaId);
+public interface IDetalleVentaRepository extends JpaRepository<DetallesVenta, Long> {
+
+    // Para reportes por rango de fechas (navega: DetallesVenta.idVenta.fecha)
+    List<DetallesVenta> findByIdVenta_FechaBetween(LocalDateTime desde, LocalDateTime hasta);
+
+    // Útil si alguna vez quieres buscar los detalles por el ID de la venta
+    // OJO: la PK en VentasEntity se llama idVentas
+    List<DetallesVenta> findByIdVenta_IdVentas(Long idVentas);
 }
