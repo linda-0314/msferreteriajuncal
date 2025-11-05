@@ -3,6 +3,7 @@ package ms.msferreteriajuncal.application;
 import lombok.RequiredArgsConstructor;
 import ms.msferreteriajuncal.application.dto.out.*;
 import ms.msferreteriajuncal.application.port.interactor.IReporteService;
+import ms.msferreteriajuncal.application.util.PdfUtil;
 import ms.msferreteriajuncal.domain.entity.DetallesVenta;
 import ms.msferreteriajuncal.domain.entity.ProductoEntity;
 import ms.msferreteriajuncal.domain.entity.VentasEntity;
@@ -22,99 +23,155 @@ import java.util.stream.Collectors;
 public class ReporteService implements IReporteService {
 
     private final VentaRepository ventaRepository;
-    private final IDetalleVentaRepository detalleRepository;
+    private final IDetalleVentaRepository detalleVentaRepository;
     private final IProductoRepository productoRepository;
 
-    private static LocalDateTime atStart(LocalDate d){ return d.atStartOfDay(); }
-    private static LocalDateTime atEnd(LocalDate d){ return d.atTime(23,59,59); }
-
+    // ------------------ Resumen de ventas (JSON) ------------------
     @Override
-    public List<VentaDiariaDto> ventasDiarias(LocalDate desde, LocalDate hasta) {
-        // Ventas dentro del rango
-        List<VentasEntity> ventas = ventaRepository.findByFechaBetween(atStart(desde), atEnd(hasta));
-        Map<LocalDate, BigDecimal> mapa = new TreeMap<>();
+    public VentaResumenDto resumenVentas(LocalDate desde, LocalDate hasta) {
+        LocalDateTime inicio = desde.atStartOfDay();
+        LocalDateTime fin = hasta.atTime(23, 59, 59);
 
-        for (VentasEntity v : ventas) {
-            LocalDate dia = v.getFecha().toLocalDate();
-            BigDecimal totalVenta = v.getTotal() != null ? v.getTotal() : BigDecimal.ZERO;
-            mapa.merge(dia, totalVenta, BigDecimal::add);
-        }
+        // Ventas en el rango
+        List<VentasEntity> ventas = ventaRepository.findByFechaBetween(inicio, fin);
 
-        return mapa.entrySet().stream()
+        int cantidadVentas = ventas.size();
+        BigDecimal totalVendido = ventas.stream()
+                .map(v -> v.getTotal() == null ? BigDecimal.ZERO : v.getTotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // Items vendidos (suma de cantidad en detalles dentro del rango)
+        List<DetallesVenta> detalles = detalleVentaRepository.findByIdVenta_FechaBetween(inicio, fin);
+        long itemsVendidos = detalles.stream()
+                .mapToLong(d -> Optional.ofNullable(d.getCantidad()).orElse(0))
+                .sum();
+
+        VentaResumenDto dto = new VentaResumenDto();
+        dto.setDesde(desde);
+        dto.setHasta(hasta);
+        dto.setCantidadVentas(cantidadVentas);
+        dto.setItemsVendidos(itemsVendidos);
+        dto.setTotalVendido(totalVendido);
+
+        return dto;
+    }
+
+    // ------------------ Ventas/Remisiones por día (PDF) ------------------
+    @Override
+    public byte[] pdfVentasDiarias(LocalDate desde, LocalDate hasta) {
+        LocalDateTime inicio = desde.atStartOfDay();
+        LocalDateTime fin = hasta.atTime(23, 59, 59);
+
+        List<VentasEntity> ventas = ventaRepository.findByFechaBetween(inicio, fin);
+
+        // Agrupar por fecha (yyyy-MM-dd) y sumar total
+        Map<LocalDate, BigDecimal> mapa = ventas.stream()
+                .collect(Collectors.groupingBy(
+                        v -> v.getFecha().toLocalDate(),
+                        Collectors.mapping(
+                                v -> v.getTotal() == null ? BigDecimal.ZERO : v.getTotal(),
+                                Collectors.reducing(BigDecimal.ZERO, BigDecimal::add)
+                        )
+                ));
+
+        // Ordenado por fecha ascendente
+        List<VentaDiariaDto> data = mapa.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
                 .map(e -> new VentaDiariaDto(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
+
+        String titulo = String.format("Ventas / Remisiones por día (%s a %s)", desde, hasta);
+        return PdfUtil.ventasDiariasPdf(data, titulo);
     }
 
+    // ------------------ Top productos (PDF) ------------------
     @Override
-    public VentaResumenDto resumen(LocalDate desde, LocalDate hasta) {
-        List<VentasEntity> ventas = ventaRepository.findByFechaBetween(atStart(desde), atEnd(hasta));
-        long cantidadVentas = ventas.size();
-        long cantidadItems = 0;
-        BigDecimal total = BigDecimal.ZERO;
+    public byte[] pdfTopProductos(LocalDate desde, LocalDate hasta, int limit) {
+        LocalDateTime inicio = desde.atStartOfDay();
+        LocalDateTime fin = hasta.atTime(23, 59, 59);
 
-        for (VentasEntity v : ventas) {
-            total = total.add(v.getTotal() != null ? v.getTotal() : BigDecimal.ZERO);
-        }
+        List<DetallesVenta> detalles = detalleVentaRepository.findByIdVenta_FechaBetween(inicio, fin);
 
-        // Para contar ítems, consultamos detalles
-        List<DetallesVenta> detalles = detalleRepository.findByIdVenta_FechaBetween(atStart(desde), atEnd(hasta));
+        // Agrupa por producto: suma cantidad y total (precio * cantidad)
+        Map<Long, TopProductoDto> agrupado = new HashMap<>();
         for (DetallesVenta d : detalles) {
-            cantidadItems += d.getCantidad();
+            if (d.getIdProducto() == null) continue;
+            Long id = d.getIdProducto().getIdProducto();
+            String nombre = safeNombreProducto(d.getIdProducto());
+
+            long cant = Optional.ofNullable(d.getCantidad()).orElse(0);
+            BigDecimal total = (d.getPrecio() == null ? BigDecimal.ZERO : d.getPrecio())
+                    .multiply(BigDecimal.valueOf(cant));
+
+            agrupado.merge(id,
+                    new TopProductoDto(id, nombre, cant, total),
+                    (a, b) -> new TopProductoDto(
+                            a.getIdProducto(),
+                            a.getNombre(),
+                            a.getCantidadVendida() + b.getCantidadVendida(),
+                            a.getTotalVendido().add(b.getTotalVendido())
+                    ));
         }
 
-        return new VentaResumenDto(desde, hasta, cantidadVentas, cantidadItems, total);
-    }
-
-    @Override
-    public List<TopProductoDto> topProductos(LocalDate desde, LocalDate hasta, int limit) {
-        List<DetallesVenta> detalles = detalleRepository.findByIdVenta_FechaBetween(atStart(desde), atEnd(hasta));
-        Map<Long, TopProductoDto> acumulado = new HashMap<>();
-
-        for (DetallesVenta d : detalles) {
-            ProductoEntity p = d.getIdProducto();
-            if (p == null) continue;
-
-            Long id = p.getIdProducto();
-            String nombre = p.getNombreProducto();
-            BigDecimal precio = d.getPrecio() != null ? d.getPrecio() : BigDecimal.ZERO;
-
-            TopProductoDto actual = acumulado.getOrDefault(id, new TopProductoDto(id, nombre, 0, BigDecimal.ZERO));
-
-            long nuevaCant = actual.getCantidadVendida() + d.getCantidad();
-            BigDecimal nuevoTotal = actual.getTotalVendido()
-                    .add(precio.multiply(BigDecimal.valueOf(d.getCantidad())));
-
-            acumulado.put(id, new TopProductoDto(id, nombre, nuevaCant, nuevoTotal));
-        }
-
-        return acumulado.values().stream()
+        // Ordena por cantidad descendente y limita
+        List<TopProductoDto> data = agrupado.values().stream()
                 .sorted(Comparator.comparingLong(TopProductoDto::getCantidadVendida).reversed())
                 .limit(limit)
                 .collect(Collectors.toList());
+
+        return PdfUtil.topProductosPdf(data, desde, hasta, limit);
     }
 
+    // ------------------ Stock bajo (PDF) ------------------
     @Override
-    public List<StockBajoDto> stockBajo(int umbral) {
+    public byte[] pdfStockBajo(int umbral) {
         List<ProductoEntity> productos = productoRepository.findByProCantidadLessThan(umbral);
-        return productos.stream()
-                .map(p -> new StockBajoDto(p.getIdProducto(), p.getNombreProducto(), p.getProCantidad()))
+
+        List<StockBajoDto> data = productos.stream()
+                .map(p -> new StockBajoDto(
+                        p.getIdProducto(),
+                        safeNombreProducto(p),
+                        Optional.ofNullable(p.getProCantidad()).orElse(0)
+                ))
                 .collect(Collectors.toList());
+
+        String titulo = String.format("Productos con stock menor a %d", umbral);
+        return PdfUtil.stockBajoPdf(data, titulo);
     }
 
+    // ------------------ Valor de inventario (PDF) ------------------
     @Override
-    public InventarioValorDto valorInventario() {
+    public byte[] pdfValorInventario() {
         List<ProductoEntity> productos = productoRepository.findAll();
+
         long cantidadProductos = productos.size();
-        BigDecimal valorTotal = BigDecimal.ZERO;
+        BigDecimal valorTotal = productos.stream()
+                .map(p -> {
+                    BigDecimal precioEntrada = BigDecimal.valueOf(
+                            Optional.ofNullable(p.getProPrecioEntrada()).orElse(0L)
+                    );
+                    BigDecimal cantidad = BigDecimal.valueOf(
+                            Optional.ofNullable(p.getProCantidad()).orElse(0)
+                    );
+                    return precioEntrada.multiply(cantidad);
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        for (ProductoEntity p : productos) {
-            BigDecimal precioEntrada = p.getProPrecioEntrada() != null
-                    ? BigDecimal.valueOf(p.getProPrecioEntrada())
-                    : BigDecimal.ZERO;
-            BigDecimal subtotal = BigDecimal.valueOf(p.getProCantidad()).multiply(precioEntrada);
-            valorTotal = valorTotal.add(subtotal);
+        InventarioValorDto dto = new InventarioValorDto(cantidadProductos, valorTotal);
+        return PdfUtil.inventarioValorPdf(dto, "Valor del Inventario");
+
+    }
+
+    // ------------------ Helpers ------------------
+    private String safeNombreProducto(ProductoEntity p) {
+        try {
+            // Tu entidad suele tener 'nombreProducto' (o similar). Si cambia el nombre, ajusta aquí UNA sola vez.
+            var field = p.getClass().getDeclaredField("nombreProducto");
+            field.setAccessible(true);
+            Object val = field.get(p);
+            return val == null ? "(sin nombre)" : val.toString();
+        } catch (Exception ignored) {
+            return "(sin nombre)";
         }
-
-        return new InventarioValorDto(cantidadProductos, valorTotal);
     }
 }

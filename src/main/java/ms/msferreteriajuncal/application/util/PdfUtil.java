@@ -45,10 +45,16 @@ public class PdfUtil {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             BigDecimal granTotal = BigDecimal.ZERO;
 
-            for (VentaDiariaDto v : data) {
-                addCell(table, v.getFecha().format(fmt), td);
-                addCell(table, v.getTotal().toPlainString(), td);
-                granTotal = granTotal.add(v.getTotal());
+            if (data != null) {
+                for (VentaDiariaDto v : data) {
+                    LocalDate f = v.getFecha();
+                    BigDecimal total = v.getTotal() == null ? BigDecimal.ZERO : v.getTotal();
+
+                    addCell(table, (f == null ? "" : f.format(fmt)), td);
+                    addCell(table, total.toPlainString(), td);
+
+                    granTotal = granTotal.add(total);
+                }
             }
 
             PdfPCell totalCell = new PdfPCell(new Phrase("Gran Total: " + granTotal.toPlainString(), th));
@@ -94,12 +100,21 @@ public class PdfUtil {
             addHeader(table, "Total", th);
 
             BigDecimal granTotal = BigDecimal.ZERO;
-            for (TopProductoDto t : data) {
-                addCell(table, String.valueOf(t.getIdProducto()), td);
-                addCell(table, t.getNombreProducto(), td);
-                addCell(table, String.valueOf(t.getCantidadVendida()), td);
-                addCell(table, t.getTotalVendido().toPlainString(), td);
-                granTotal = granTotal.add(t.getTotalVendido());
+
+            if (data != null) {
+                for (TopProductoDto t : data) {
+                    Long id = t.getIdProducto();
+                    String nombre = t.getNombreProducto(); // OJO: el DTO debe tener getNombreProducto()
+                    long cantidad = t.getCantidadVendida();
+                    BigDecimal total = t.getTotalVendido() == null ? BigDecimal.ZERO : t.getTotalVendido();
+
+                    addCell(table, String.valueOf(id == null ? "" : id), td);
+                    addCell(table, nombre == null ? "" : nombre, td);
+                    addCell(table, String.valueOf(cantidad), td);
+                    addCell(table, total.toPlainString(), td);
+
+                    granTotal = granTotal.add(total);
+                }
             }
 
             PdfPCell totalCell = new PdfPCell(new Phrase("Gran Total: " + granTotal.toPlainString(), th));
@@ -142,8 +157,11 @@ public class PdfUtil {
             addHeader(table, "Métrica", th);
             addHeader(table, "Valor", th);
 
+            String periodo = (resumen.getDesde() == null ? "" : resumen.getDesde())
+                    + " a "
+                    + (resumen.getHasta() == null ? "" : resumen.getHasta());
             addCell(table, "Periodo", td);
-            addCell(table, resumen.getDesde() + " a " + resumen.getHasta(), td);
+            addCell(table, periodo, td);
 
             addCell(table, "Cantidad de ventas", td);
             addCell(table, String.valueOf(resumen.getCantidadVentas()), td);
@@ -151,8 +169,9 @@ public class PdfUtil {
             addCell(table, "Items vendidos", td);
             addCell(table, String.valueOf(resumen.getItemsVendidos()), td);
 
+            BigDecimal totalVendido = resumen.getTotalVendido() == null ? BigDecimal.ZERO : resumen.getTotalVendido();
             addCell(table, "Total vendido", td);
-            addCell(table, resumen.getTotalVendido().toPlainString(), td);
+            addCell(table, totalVendido.toPlainString(), td);
 
             doc.add(table);
         } catch (Exception e) {
@@ -188,10 +207,12 @@ public class PdfUtil {
             addHeader(table, "Producto", th);
             addHeader(table, "Cantidad", th);
 
-            for (StockBajoDto s : data) {
-                addCell(table, String.valueOf(s.getIdProducto()), td);
-                addCell(table, s.getNombreProducto(), td);
-                addCell(table, String.valueOf(s.getCantidadActual()), td);
+            if (data != null) {
+                for (StockBajoDto s : data) {
+                    addCell(table, String.valueOf(s.getIdProducto()), td);
+                    addCell(table, s.getNombreProducto() == null ? "" : s.getNombreProducto(), td);
+                    addCell(table, String.valueOf(s.getCantidadActual()), td);
+                }
             }
 
             doc.add(table);
@@ -228,11 +249,16 @@ public class PdfUtil {
             addHeader(table, "Concepto", th);
             addHeader(table, "Valor", th);
 
+            long cantidadProductos = dto == null ? 0 : dto.getCantidadProductos();
+            BigDecimal valorTotal = (dto == null || dto.getValorTotal() == null)
+                    ? BigDecimal.ZERO
+                    : dto.getValorTotal();
+
             addCell(table, "Cantidad de productos", td);
-            addCell(table, String.valueOf(dto.getCantidadProductos()), td);
+            addCell(table, String.valueOf(cantidadProductos), td);
 
             addCell(table, "Valor total (precio entrada x cantidad)", td);
-            addCell(table, dto.getValorTotal().toPlainString(), td);
+            addCell(table, valorTotal.toPlainString(), td);
 
             doc.add(table);
         } catch (Exception e) {

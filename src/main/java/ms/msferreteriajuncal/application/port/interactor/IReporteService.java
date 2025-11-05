@@ -1,13 +1,17 @@
 package ms.msferreteriajuncal.application.port.interactor;
 
-import ms.msferreteriajuncal.application.dto.out.*;
+import ms.msferreteriajuncal.application.dto.out.VentaResumenDto;
+
 import java.time.LocalDate;
-import java.util.List;
 
 public interface IReporteService {
-    List<VentaDiariaDto> ventasDiarias(LocalDate desde, LocalDate hasta);
-    VentaResumenDto resumen(LocalDate desde, LocalDate hasta);
-    List<TopProductoDto> topProductos(LocalDate desde, LocalDate hasta, int limit);
-    List<StockBajoDto> stockBajo(int umbral);
-    InventarioValorDto valorInventario();
+
+    // JSON (para la tabla de "Resumen de Ventas")
+    VentaResumenDto resumenVentas(LocalDate desde, LocalDate hasta);
+
+    // PDFs (coinciden con lo que muestra tu PdfUtil)
+    byte[] pdfVentasDiarias(LocalDate desde, LocalDate hasta);
+    byte[] pdfTopProductos(LocalDate desde, LocalDate hasta, int limit);
+    byte[] pdfStockBajo(int umbral);
+    byte[] pdfValorInventario();
 }
