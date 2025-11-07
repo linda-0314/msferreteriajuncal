@@ -18,69 +18,61 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    /**
+     * DTO liviano pensado para autocompletado en Remisión/Venta:
+     * - id: id del producto
+     * - nombre: nombre visible
+     * - valorUnitario: precio de salida actual (pro_precio_salida)
+     */
+    public record ProductoLite(Long id, String nombre, Long valorUnitario) {}
 
-    // REGISTRAR
-    @PostMapping("/guardar")
-    public ResponseEntity<?> Guardar (@RequestBody ProductoDto productoDto) {
-        productoService.guardarProducto(productoDto);
-        return new ResponseEntity<>("producto registrado ", HttpStatus.CREATED);
-    }
-
-    //LISTAR
-    @GetMapping("/obtener")
-    public ResponseEntity<List<ProductoEntity>> Listar(){
-        List<ProductoEntity> productoEntities = productoService.listarProducto();
-        return new ResponseEntity<>(productoEntities, HttpStatus.OK);
-    }
-
-    //MODIFICAR
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductoDto> actualizar(@PathVariable Long id, @RequestBody ProductoDto dto)
-    {
-
-        dto.setId(id);
-        ProductoDto actualizado = productoService.guardarProducto(dto);
-        return ResponseEntity.ok(actualizado);
-    }
-
-    //ELIMINAR
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        // existe el producto ?
-        if (productoService.getProductoById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        // Si existe, lo eliminamos
-        productoService.eliminarProductoPorId(id);
-        // Respondemos borrado correcto sin cuerpo
-        return ResponseEntity.ok( ).build();
-    }
-
-    // BUSCAR POR NOMBRE (autocomplete)
+    // =========================
+    //      AUTOCOMPLETADO
+    // =========================
+    /**
+     * Busca por nombre (insensible a mayúsculas/minúsculas) y devuelve como máximo 20 coincidencias.
+     * Uso desde el frontend:
+     *   GET /productos/buscar?q=tuTexto
+     */
     @GetMapping("/buscar")
-    public ResponseEntity<List<ProductoLite>> buscarPorNombre(@RequestParam("nombre") String nombre) {
-        var lista = productoService.buscarPorNombre(nombre);
-        // Devolvemos solo lo que necesita el front para autocompletar
-        var out = lista.stream()
+    public ResponseEntity<List<ProductoLite>> buscar(@RequestParam(name = "q", required = false) String q) {
+        List<ProductoLite> result = productoService.buscarPorNombre(q)
+                .stream()
                 .map(p -> new ProductoLite(
                         p.getIdProducto(),
-                        // Usa el getter correcto según tu Entity:
-                        // p.getProNombre(),
-                        // p.getNombreProducto(),
-                        // Si tu campo es proNombre:
-                        // p.getProNombre(),
-                        // Si tu campo es nombreProducto:
                         p.getNombreProducto(),
-                        p.getProPrecioSalida()
+                        p.getProPrecioSalida() == null ? 0L : p.getProPrecioSalida()
                 ))
                 .toList();
-        return new ResponseEntity<>(out, HttpStatus.OK);
+        return ResponseEntity.ok(result);
     }
 
-    // DTO liviano para autocomplete
-    public record ProductoLite(Long id, String nombre, Long precioSalida) {}
+    // =========================
+    //        CRUD BÁSICO
+    // =========================
 
+    /**
+     * Crear/Actualizar producto.
+     * Recibe un ProductoDto y devuelve el mismo dto con id asignado al guardar.
+     */
+    @PostMapping("/guardar")
+    public ResponseEntity<ProductoDto> guardar(@RequestBody ProductoDto producto) {
+        ProductoDto guardado = productoService.guardarProducto(producto);
+        return new ResponseEntity<>(guardado, HttpStatus.OK);
+    }
 
+    /**
+     * Lista todos los productos (entidad completa).
+     */
+    @GetMapping("/listar")
+    public ResponseEntity<List<ProductoEntity>> listar() {
+        List<ProductoEntity> productos = productoService.listarProducto();
+        return new ResponseEntity<>(productos, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene un producto por id (entidad completa).
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProductoEntity> obtenerPorId(@PathVariable Long id) {
         ProductoEntity producto = productoService.getProductoById(id)
@@ -88,5 +80,16 @@ public class ProductoController {
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }
 
+    /**
+     * Elimina un producto por id.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        if (productoService.getProductoById(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        productoService.eliminarProductoPorId(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

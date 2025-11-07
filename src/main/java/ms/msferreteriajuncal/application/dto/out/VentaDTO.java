@@ -6,35 +6,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class VentaDTO {
-    private long idVenta;
+    private Long id;
     private LocalDateTime fecha;
-    private long userId;
+
+    private Long userId;          // vendedor
+    private String clienteNombre; // NUEVO
+    private String clienteDocumento; // NUEVO
+    private String clienteEmail;  // NUEVO
+
     private BigDecimal total;
+
     private List<Item> items;
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-
+    @Getter @Setter @NoArgsConstructor @AllArgsConstructor
     public static class Item {
-        private Long idProducto;          //
-        private String nombreProducto;    //
-        private Integer cantidad;         // uni vendidas
-        private BigDecimal proUnidad;// precio por unidad
-        private BigDecimal subtotal;      // cantidad * precioUnitario
+        private Long idProducto;
+        private String nombreProducto;
+        private Integer cantidad;
+        private BigDecimal proUnidad;
+        private BigDecimal subtotal;
     }
-
-
-
-
 }
