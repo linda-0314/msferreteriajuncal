@@ -10,4 +10,6 @@ public interface IPersonaService {
     void guardarUsuario(UsuarioRequestDto loguinRequest);
 
     List<PersonaEntity> listPersonas();
+
+    void eliminarPersonaCascade(Long personaId);
 }

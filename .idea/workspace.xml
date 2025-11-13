@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026882b-7c6a-422d-aa26-aa47a6f2216b" name="Changes" comment="se elimina clase porque no se requiere">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/MailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/logo-ag.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/UsuarioQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/UsuarioPersonaResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/UsuarioController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IRolesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
@@ -15,36 +17,20 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/VentaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/VentaService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO$Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaDTO$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaDTO$Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/dto/out/VentaDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/util/PdfUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/util/PdfUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/domain/entity/VentasEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/domain/entity/VentasEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/ProductoController$ProductoLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/ProductoController$ProductoLite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/ProductoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/ProductoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/VentaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/VentaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/VentaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/VentaRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/PersonaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/PersonaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/port/interactor/IPersonaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/application/port/interactor/IPersonaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/PersonaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/controller/PersonaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IUserRolEntityRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IUserRolEntityRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IUsuarioRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ms/msferreteriajuncal/infrastructure/repository/IUsuarioRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GlobalErrors.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IReporteService.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IVentaRepository.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PdfUtil.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteController.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteService.class.uniqueId7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReporteServiceImpl.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VentaResumenDto.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VentaController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VentaService.class.uniqueId0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/VentaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/VentaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/in/VentaCreateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/dto/out/VentaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/util/PdfUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/util/PdfUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/VentasEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/domain/entity/VentasEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/VentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/VentaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/VentaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/VentaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/PersonaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/PersonaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/port/interactor/IPersonaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/application/port/interactor/IPersonaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/PersonaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/PersonaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IUserRolEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IUserRolEntityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IUsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/repository/IUsuarioRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,22 +217,16 @@
       <workItem from="1762395585328" duration="752000" />
       <workItem from="1762402863508" duration="9844000" />
       <workItem from="1762453105320" duration="660000" />
-      <workItem from="1762528915778" duration="4342000" />
+      <workItem from="1762528915778" duration="5408000" />
+      <workItem from="1762563792908" duration="338000" />
+      <workItem from="1762895111958" duration="3000" />
+      <workItem from="1762896464876" duration="1019000" />
+      <workItem from="1762923122495" duration="7469000" />
+      <workItem from="1762997792452" duration="34000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ms/msferreteriajuncal/infrastructure/controller/ReporteController.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

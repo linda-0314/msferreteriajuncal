@@ -16,4 +16,7 @@ public interface IUsuarioRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByUsernameOrEmail(String username, String email);
 
+    @Query("SELECT u FROM UserEntity u WHERE u.persona.idPersona = :personaId")
+    Optional<UserEntity> findByPersonaId(Long personaId);
+
 }

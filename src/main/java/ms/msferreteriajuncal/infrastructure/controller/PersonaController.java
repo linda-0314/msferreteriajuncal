@@ -29,6 +29,13 @@ public class PersonaController {
         List<PersonaEntity> personaEntities = personaService.listPersonas();
         return new ResponseEntity<>(personaEntities, HttpStatus.OK);
     }
+
+    @DeleteMapping("/eliminar/persona/{id}")
+    public ResponseEntity<Void> eliminarPersona(@PathVariable("id") Long id) {
+        personaService.eliminarPersonaCascade(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 
 
