@@ -47,14 +47,7 @@ public class ProductoController {
         return ResponseEntity.ok(result);
     }
 
-    // =========================
-    //        CRUD BÁSICO
-    // =========================
-
-    /**
-     * Crear/Actualizar producto.
-     * Recibe un ProductoDto y devuelve el mismo dto con id asignado al guardar.
-     */
+    // crear
     @PostMapping("/guardar")
     public ResponseEntity<ProductoDto> guardar(@RequestBody ProductoDto producto) {
         ProductoDto guardado = productoService.guardarProducto(producto);
@@ -79,6 +72,20 @@ public class ProductoController {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductoDto> actualizar(
+            @PathVariable Long id,
+            @RequestBody ProductoDto dto
+    ){
+        dto.setIdProducto(id);
+
+        ProductoDto actualizado = productoService.guardarProducto(dto);
+
+        return ResponseEntity.ok(actualizado);
+    }
+
+
 
     /**
      * Elimina un producto por id.

@@ -14,30 +14,33 @@ import java.util.Optional;
 public class ProductoService implements IProductoService {
 
     @Autowired
-    private IProductoRepository productoRepository; // INYECTA REPOSITORIO
+    private IProductoRepository productoRepository;
 
     @Override
-    public List<ProductoEntity> listarProducto() {  //LISTAR
+    public List<ProductoEntity> listarProducto() {
         return productoRepository.findAll();
     }
 
     @Override
-    public Optional<ProductoEntity> getProductoById(Long id) {  // POR
+    public Optional<ProductoEntity> getProductoById(Long id) {
         return productoRepository.findById(id);
     }
 
     @Override
     public ProductoDto guardarProducto(ProductoDto producto) {
+
         ProductoEntity productoEntity;
 
-        if (producto.getId() != 0 && productoRepository.existsById(producto.getId())) {
-            // Si existe, SE PUEDE MODIFICAR
-            productoEntity = productoRepository.findById(producto.getId()).get();
+        if (producto.getIdProducto() != null &&
+                productoRepository.existsById(producto.getIdProducto())) {
+
+            // Actualizar producto existente
+            productoEntity = productoRepository.findById(producto.getIdProducto()).get();
+
         } else {
-            // Si no existe, lo creamos
+            // Crear nuevo producto
             productoEntity = new ProductoEntity();
         }
-
 
         productoEntity.setNombreProducto(producto.getNombreProducto());
         productoEntity.setProCategoria(producto.getProCategoria());
@@ -48,7 +51,9 @@ public class ProductoService implements IProductoService {
         productoEntity.setProDescuento(producto.getProDescuento());
 
         ProductoEntity savedProducto = productoRepository.save(productoEntity);
-        producto.setId(savedProducto.getIdProducto());
+
+        // Devolver ID actualizado
+        producto.setIdProducto(savedProducto.getIdProducto());
         return producto;
     }
 
@@ -62,8 +67,6 @@ public class ProductoService implements IProductoService {
         if (nombre == null || nombre.trim().isEmpty()) {
             return List.of();
         }
-        // Usa el que corresponda según tu Entity:
         return productoRepository.findTop20ByNombreProductoContainingIgnoreCaseOrderByNombreProductoAsc(nombre.trim());
     }
-
 }
