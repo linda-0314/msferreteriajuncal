@@ -5,9 +5,6 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.List;
-import ms.msferreteriajuncal.domain.entity.ProductoEntity;
-
 
 public interface IProductoRepository extends JpaRepository<ProductoEntity, Long> {
 
@@ -19,9 +16,10 @@ public interface IProductoRepository extends JpaRepository<ProductoEntity, Long>
     """)
     int descontarStock(@Param("id") Long id, @Param("qty") int qty);
 
-    List<ProductoEntity> findTop20ByNombreProductoContainingIgnoreCaseOrderByNombreProductoAsc(String nombre);
+    List<ProductoEntity> findByProActivoTrueOrderByNombreProductoAsc();
 
+    List<ProductoEntity> findTop20ByProActivoTrueAndNombreProductoContainingIgnoreCaseOrderByNombreProductoAsc(String nombre);
+
+    // Ya lo tenías: productos con stock por debajo de un umbral
     List<ProductoEntity> findByProCantidadLessThan(int umbral);
 }
-
-//hace la resta en la BD y solo si hay stock suficiente, y si no “Stock insuficiente”..

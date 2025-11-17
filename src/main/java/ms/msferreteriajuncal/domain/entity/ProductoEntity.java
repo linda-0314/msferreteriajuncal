@@ -7,18 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "productos") // <-- minúsculas
+@Table(name = "productos")
 public class ProductoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")       // <-- minúsculas
-    private Long idProducto;            // usa Long (wrapper)
+    @Column(name = "id_producto")
+    private Long idProducto;
 
-    @Column(name = "nom_producto")
+    @Column(name = "nom_producto", length = 200, nullable = false)
     private String nombreProducto;
 
-    @Column(name = "pro_categoria", length = 60)
+    @Column(name = "pro_categoria", length = 100)
     private String proCategoria;
 
     @Column(name = "pro_unidad")
@@ -35,4 +35,7 @@ public class ProductoEntity {
 
     @Column(name = "pro_descuento")
     private Long proDescuento;
+
+    @Column(name = "pro_activo")
+    private Boolean proActivo = true;
 }
